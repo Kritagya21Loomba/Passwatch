@@ -89,7 +89,7 @@ export function updateAttackCards(crackTimes) {
 
 // ─── Pattern heatmap ────────────────────────────────────────
 
-export function updateHeatmap(pwd, patterns) {
+export function updateHeatmap(pwd, patterns, masked) {
   const container = document.getElementById('heatmap');
   container.innerHTML = '';
 
@@ -138,13 +138,13 @@ export function updateHeatmap(pwd, patterns) {
       }
     }
 
-    cell.textContent = ch;
+    cell.textContent = masked ? '•' : ch;
 
     // Tooltip
     const tooltip = document.createElement('div');
     tooltip.className = 'heatmap-tooltip';
     let charClass = /[a-z]/.test(ch) ? 'lowercase' : /[A-Z]/.test(ch) ? 'uppercase' : /[0-9]/.test(ch) ? 'digit' : 'symbol';
-    let tip = `"${ch}" — ${charClass}`;
+    let tip = masked ? `${charClass}` : `"${ch}" — ${charClass}`;
     if (coverage[i]) {
       tip += `\n⚠ Part of ${coverage[i].type.replace(/_/g, ' ')}`;
     }
@@ -228,11 +228,11 @@ export function updateWeaknessList(patterns) {
 
 // ─── Master update ──────────────────────────────────────────
 
-export function updateAll(pwd, result) {
+export function updateAll(pwd, result, masked) {
   updateRing(result.entropy);
   updateStrengthBar(result.strength);
   updateAttackCards(result.crackTimes);
-  updateHeatmap(pwd, result.patterns);
+  updateHeatmap(pwd, result.patterns, masked);
   updateWeaknessList(result.patterns);
 
   // Update notes

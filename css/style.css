@@ -658,6 +658,14 @@ body {
   letter-spacing: 0.5px;
 }
 
+.footer-credit {
+  margin-top: 6px;
+}
+
+.footer-credit strong {
+  color: var(--text);
+}
+
 /* ═══ Responsive ═══ */
 
 @media (max-width: 860px) {

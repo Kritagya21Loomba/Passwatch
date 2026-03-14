@@ -10,12 +10,17 @@ document.addEventListener('DOMContentLoaded', () => {
   const howToggle = document.getElementById('how-toggle');
   const howContent = document.getElementById('how-content');
 
-  // Password input handler
-  input.addEventListener('input', () => {
+  let lastResult = null;
+
+  function refresh() {
     const pwd = input.value;
-    const result = analyzePassword(pwd);
-    updateAll(pwd, result);
-  });
+    lastResult = analyzePassword(pwd);
+    const masked = input.type === 'password';
+    updateAll(pwd, lastResult, masked);
+  }
+
+  // Password input handler
+  input.addEventListener('input', refresh);
 
   // Show/hide toggle
   toggleBtn.addEventListener('click', () => {
@@ -23,6 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
     input.type = isPassword ? 'text' : 'password';
     toggleBtn.textContent = isPassword ? '◉' : '◎';
     toggleBtn.title = isPassword ? 'Hide password' : 'Show password';
+    refresh();
   });
 
   // How-it-works collapsible
@@ -32,6 +38,6 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // Initialize with empty state
-  const result = analyzePassword('');
-  updateAll('', result);
+  lastResult = analyzePassword('');
+  updateAll('', lastResult, true);
 });
