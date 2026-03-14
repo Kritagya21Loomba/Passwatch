@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PassWatch – Password Strength Visualizer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="grain-overlay"></div>
+
+  <div class="container">
+    <!-- ═══ Hero row ═══ -->
+    <header class="hero">
+      <div class="hero-left">
+        <h1 class="title">Pass<span class="accent">Watch</span></h1>
+        <p class="subtitle">Cinematic password strength visualizer</p>
+
+        <div class="input-group">
+          <input
+            type="password"
+            id="password-input"
+            placeholder="Type a password to analyze…"
+            autocomplete="off"
+            spellcheck="false"
+          >
+          <button id="toggle-visibility" class="toggle-btn" title="Show password">◎</button>
+        </div>
+        <p class="hint">All analysis happens locally in your browser.</p>
+      </div>
+
+      <div class="hero-right">
+        <div class="ring-container">
+          <div id="entropy-ring" class="entropy-ring">
+            <div class="ring-inner">
+              <span id="ring-label" class="ring-value">–</span>
+              <span class="ring-unit">bits</span>
+              <span id="ring-sublabel" class="ring-sublabel">Enter a password</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- ═══ Analysis dashboard ═══ -->
+    <section class="dashboard">
+      <!-- Row 1: Strength + Crack-time -->
+      <div class="dash-row">
+        <div class="panel strength-panel">
+          <h2 class="panel-title">Strength</h2>
+          <div class="strength-bar-container">
+            <div class="strength-bar">
+              <div id="strength-fill" class="strength-fill"></div>
+              <div class="scanline"></div>
+            </div>
+            <div class="strength-meta">
+              <span class="strength-score-wrap"><span id="strength-score" class="strength-score">0</span>/100</span>
+              <span id="strength-label" class="strength-label">–</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel cards-panel">
+          <h2 class="panel-title">Crack-time Estimates</h2>
+          <div class="attack-cards">
+            <div id="card-online" class="attack-card">
+              <div class="card-label">Online</div>
+              <div class="card-time">–</div>
+              <div class="card-desc">Rate-limited login attempts</div>
+            </div>
+            <div id="card-gpu" class="attack-card">
+              <div class="card-label">GPU</div>
+              <div class="card-time">–</div>
+              <div class="card-desc">Single consumer GPU</div>
+            </div>
+            <div id="card-asic" class="attack-card">
+              <div class="card-label">ASIC Cluster</div>
+              <div class="card-time">–</div>
+              <div class="card-desc">Specialized hardware cluster</div>
+            </div>
+          </div>
+          <p id="crack-notes" class="crack-notes"></p>
+        </div>
+      </div>
+
+      <!-- Row 2: Forensic breakdown -->
+      <div class="dash-row">
+        <div class="panel heatmap-panel">
+          <h2 class="panel-title">Character Analysis</h2>
+          <div id="heatmap" class="heatmap">
+            <span class="heatmap-placeholder">Character analysis will appear here</span>
+          </div>
+          <div class="heatmap-legend">
+            <span class="legend-item"><span class="legend-swatch" style="background:#00f2ff"></span>lower</span>
+            <span class="legend-item"><span class="legend-swatch" style="background:#6ea8ff"></span>UPPER</span>
+            <span class="legend-item"><span class="legend-swatch" style="background:#ffbe00"></span>digit</span>
+            <span class="legend-item"><span class="legend-swatch" style="background:#ff006e"></span>symbol</span>
+            <span class="legend-item"><span class="legend-swatch flagged-swatch"></span>flagged</span>
+          </div>
+        </div>
+
+        <div class="panel weaknesses-panel">
+          <h2 class="panel-title">Weakness Report</h2>
+          <div id="weaknesses" class="weaknesses">
+            <div class="weakness-placeholder">No weaknesses detected.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ How this works ═══ -->
+    <section class="how-section">
+      <button id="how-toggle" class="how-toggle">
+        <span class="how-arrow">▸</span> How this works
+      </button>
+      <div id="how-content" class="how-content">
+        <div class="how-grid">
+          <div class="how-card">
+            <h3>Entropy</h3>
+            <p>Entropy measures the unpredictability of a password in bits.
+               It's calculated as <code>L × log₂(N)</code> where <em>L</em> is the password length
+               and <em>N</em> is the size of the character set used. Higher entropy = harder to guess.</p>
+          </div>
+          <div class="how-card">
+            <h3>Attack Models</h3>
+            <p><strong>Online:</strong> ~100 guesses/hour (rate-limited).
+               <strong>GPU:</strong> ~1 billion guesses/sec (offline hash cracking).
+               <strong>ASIC:</strong> ~1 quadrillion guesses/sec (specialized hardware).
+               Times shown are worst-case (exhaustive search of keyspace).</p>
+          </div>
+          <div class="how-card">
+            <h3>Disclaimer</h3>
+            <p>These are <strong>approximate, educational estimates</strong>.
+               All analysis runs locally in your browser — no data is sent anywhere.
+               Do not reuse passwords shown here on real accounts.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ Footer ═══ -->
+    <footer class="footer">
+      <p>PassWatch — Educational password analysis tool. No data leaves your browser.</p>
+    </footer>
+  </div>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

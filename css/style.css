@@ -1,0 +1,689 @@
+/* PassWatch – Noir Neon Theme
+   ──────────────────────────── */
+
+/* ═══ Reset & base ═══ */
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --bg-deep: #050509;
+  --bg-surface: #0b0b14;
+  --bg-panel: #0f0f1a;
+  --bg-elevated: #14142a;
+  --border: #1a1a3020;
+  --text: #c8c8d8;
+  --text-dim: #666680;
+  --text-muted: #444460;
+  --cyan: #00f2ff;
+  --magenta: #ff006e;
+  --red: #ff003c;
+  --orange: #ff6b00;
+  --yellow: #ffbe00;
+  --green: #00ff88;
+  --blue: #6ea8ff;
+  --font-display: 'Space Grotesk', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+html {
+  font-size: 16px;
+}
+
+body {
+  background: var(--bg-deep);
+  color: var(--text);
+  font-family: var(--font-mono);
+  line-height: 1.6;
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ═══ Grain overlay ═══ */
+
+.grain-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image: url('assets/grain.svg');
+  background-repeat: repeat;
+  background-size: 200px;
+}
+
+/* ═══ Container ═══ */
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 48px 32px 32px;
+}
+
+/* ═══ Hero section ═══ */
+
+.hero {
+  display: flex;
+  align-items: center;
+  gap: 60px;
+  margin-bottom: 48px;
+}
+
+.hero-left {
+  flex: 1;
+}
+
+.hero-right {
+  flex-shrink: 0;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: 3rem;
+  font-weight: 700;
+  letter-spacing: -1px;
+  color: var(--text);
+  line-height: 1.1;
+  margin-bottom: 6px;
+}
+
+.title .accent {
+  color: var(--cyan);
+  text-shadow: 0 0 20px rgba(0, 242, 255, 0.3);
+}
+
+.subtitle {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  color: var(--text-dim);
+  font-weight: 400;
+  margin-bottom: 28px;
+  letter-spacing: 0.5px;
+}
+
+/* ═══ Input ═══ */
+
+.input-group {
+  position: relative;
+  margin-bottom: 10px;
+}
+
+#password-input {
+  width: 100%;
+  padding: 14px 50px 14px 18px;
+  background: var(--bg-panel);
+  border: 1px solid #1a1a30;
+  border-radius: 8px;
+  color: var(--cyan);
+  font-family: var(--font-mono);
+  font-size: 1.1rem;
+  letter-spacing: 1px;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+#password-input::placeholder {
+  color: var(--text-muted);
+  letter-spacing: 0;
+}
+
+#password-input:focus {
+  border-color: var(--cyan);
+  box-shadow: 0 0 20px rgba(0, 242, 255, 0.1), inset 0 0 20px rgba(0, 242, 255, 0.03);
+}
+
+.toggle-btn {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: var(--text-dim);
+  font-size: 1.4rem;
+  cursor: pointer;
+  padding: 6px 10px;
+  transition: color 0.2s;
+  line-height: 1;
+}
+
+.toggle-btn:hover {
+  color: var(--cyan);
+}
+
+.hint {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  padding-left: 2px;
+}
+
+/* ═══ Entropy ring ═══ */
+
+.ring-container {
+  display: flex;
+  justify-content: center;
+}
+
+.entropy-ring {
+  width: 190px;
+  height: 190px;
+  border-radius: 50%;
+  background: conic-gradient(var(--cyan) 0deg, #1a1a2e 0deg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.4s ease, filter 0.4s ease;
+  filter: drop-shadow(0 0 12px rgba(0, 242, 255, 0.25));
+  position: relative;
+}
+
+.ring-inner {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background: var(--bg-deep);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+}
+
+.ring-value {
+  font-family: var(--font-display);
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: var(--cyan);
+  line-height: 1;
+  transition: color 0.3s;
+}
+
+.ring-unit {
+  font-size: 0.7rem;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-top: 2px;
+}
+
+.ring-sublabel {
+  font-size: 0.65rem;
+  color: var(--cyan);
+  margin-top: 6px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: color 0.3s;
+}
+
+/* ═══ Dashboard ═══ */
+
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-bottom: 40px;
+}
+
+.dash-row {
+  display: flex;
+  gap: 20px;
+}
+
+.panel {
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 22px 26px;
+  flex: 1;
+}
+
+.panel-title {
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--text-dim);
+  margin-bottom: 16px;
+}
+
+/* ═══ Strength bar ═══ */
+
+.strength-panel {
+  flex: 0.7;
+}
+
+.strength-bar-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.strength-bar {
+  height: 8px;
+  background: var(--bg-elevated);
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+}
+
+.strength-fill {
+  height: 100%;
+  width: 0%;
+  border-radius: 4px;
+  transition: width 0.4s ease, background 0.4s ease, box-shadow 0.4s ease;
+  position: relative;
+}
+
+.scanline {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(255, 255, 255, 0.03) 2px,
+    rgba(255, 255, 255, 0.03) 4px
+  );
+  animation: scanmove 3s linear infinite;
+}
+
+@keyframes scanmove {
+  0% { background-position: 0 0; }
+  100% { background-position: 0 40px; }
+}
+
+.strength-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.strength-score-wrap {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.strength-score {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  font-weight: 700;
+  transition: color 0.3s;
+}
+
+.strength-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: color 0.3s;
+}
+
+/* ═══ Attack cards ═══ */
+
+.cards-panel {
+  flex: 1.3;
+}
+
+.attack-cards {
+  display: flex;
+  gap: 12px;
+}
+
+.attack-card {
+  flex: 1;
+  background: var(--bg-elevated);
+  border: 1px solid #1a1a3020;
+  border-radius: 8px;
+  padding: 16px 14px;
+  text-align: center;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.card-label {
+  font-family: var(--font-display);
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--text-dim);
+  margin-bottom: 10px;
+}
+
+.card-time {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 8px;
+  min-height: 1.4em;
+  transition: color 0.3s;
+}
+
+.card-desc {
+  font-size: 0.6rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+.crack-notes {
+  font-size: 0.7rem;
+  color: var(--orange);
+  margin-top: 12px;
+  min-height: 1em;
+}
+
+/* ═══ Pattern heatmap ═══ */
+
+.heatmap-panel {
+  flex: 1;
+}
+
+.heatmap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  min-height: 48px;
+  align-items: center;
+}
+
+.heatmap-placeholder,
+.weakness-placeholder {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+.heatmap-cell {
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  font-weight: 500;
+  border-radius: 5px;
+  border: 1px solid transparent;
+  position: relative;
+  cursor: default;
+  transition: background 0.2s, border-color 0.2s, transform 0.15s;
+}
+
+.heatmap-cell:hover {
+  transform: scale(1.15);
+  z-index: 2;
+}
+
+.heatmap-cell.heatmap-flagged {
+  border-width: 2px;
+  animation: flagPulse 2s ease-in-out infinite;
+}
+
+@keyframes flagPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.75; }
+}
+
+.heatmap-tooltip {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: #1a1a2eee;
+  border: 1px solid #2a2a4a;
+  border-radius: 6px;
+  padding: 6px 10px;
+  font-size: 0.65rem;
+  color: var(--text);
+  white-space: pre-line;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.15s;
+  z-index: 10;
+  min-width: 140px;
+  text-align: left;
+}
+
+.heatmap-cell:hover .heatmap-tooltip {
+  opacity: 1;
+}
+
+.heatmap-legend {
+  display: flex;
+  gap: 14px;
+  margin-top: 14px;
+  flex-wrap: wrap;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.6rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.legend-swatch {
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  display: inline-block;
+}
+
+.flagged-swatch {
+  background: transparent;
+  border: 2px solid var(--red);
+}
+
+/* ═══ Weakness callouts ═══ */
+
+.weaknesses-panel {
+  flex: 1;
+}
+
+.weaknesses {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.weakness-item {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  padding: 12px 14px;
+  border-radius: 8px;
+  background: var(--bg-elevated);
+  border-left: 3px solid transparent;
+  animation: slideIn 0.25s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.weakness-item.severity-high {
+  border-left-color: var(--red);
+  background: linear-gradient(90deg, rgba(255, 0, 60, 0.06), transparent);
+}
+
+.weakness-item.severity-medium {
+  border-left-color: var(--orange);
+  background: linear-gradient(90deg, rgba(255, 107, 0, 0.06), transparent);
+}
+
+.weakness-item.severity-low {
+  border-left-color: var(--yellow);
+  background: linear-gradient(90deg, rgba(255, 190, 0, 0.06), transparent);
+}
+
+.weakness-icon {
+  font-size: 1.1rem;
+  line-height: 1;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.weakness-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.weakness-title {
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 3px;
+}
+
+.weakness-desc {
+  font-size: 0.7rem;
+  color: var(--text-dim);
+  line-height: 1.5;
+}
+
+/* ═══ How this works ═══ */
+
+.how-section {
+  margin-bottom: 32px;
+}
+
+.how-toggle {
+  background: none;
+  border: none;
+  color: var(--text-dim);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  cursor: pointer;
+  padding: 8px 0;
+  transition: color 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.how-toggle:hover {
+  color: var(--cyan);
+}
+
+.how-arrow {
+  font-size: 0.7rem;
+  transition: transform 0.2s;
+}
+
+.how-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease, opacity 0.3s ease;
+  opacity: 0;
+}
+
+.how-content.expanded {
+  max-height: 400px;
+  opacity: 1;
+  margin-top: 12px;
+}
+
+.how-grid {
+  display: flex;
+  gap: 16px;
+}
+
+.how-card {
+  flex: 1;
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 18px 20px;
+}
+
+.how-card h3 {
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--cyan);
+  margin-bottom: 8px;
+}
+
+.how-card p {
+  font-size: 0.7rem;
+  color: var(--text-dim);
+  line-height: 1.7;
+}
+
+.how-card code {
+  background: var(--bg-elevated);
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-size: 0.68rem;
+  color: var(--cyan);
+}
+
+.how-card strong {
+  color: var(--text);
+}
+
+.how-card em {
+  color: var(--cyan);
+  font-style: normal;
+}
+
+/* ═══ Footer ═══ */
+
+.footer {
+  text-align: center;
+  padding: 20px 0 8px;
+  border-top: 1px solid #1a1a3015;
+}
+
+.footer p {
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  letter-spacing: 0.5px;
+}
+
+/* ═══ Responsive ═══ */
+
+@media (max-width: 860px) {
+  .hero {
+    flex-direction: column;
+    gap: 32px;
+    text-align: center;
+  }
+
+  .dash-row {
+    flex-direction: column;
+  }
+
+  .attack-cards {
+    flex-direction: column;
+  }
+
+  .how-grid {
+    flex-direction: column;
+  }
+
+  .container {
+    padding: 24px 16px 24px;
+  }
+
+  .title {
+    font-size: 2.2rem;
+  }
+}
